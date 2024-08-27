@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Attribute from './Attribute';
 
-const AttributeList = ({ attributeList, onUpdateAttrValue }) => {
+const AttributeList = ({ attributeList, onUpdateAttrValue, onUpdateModifier }) => {
 
     const showAttributes = () => {
         return (
             <div>
                 {attributeList.map(attr => (
-                    <Attribute key={attr.id} attr={attr} onUpdateAttrValue={onUpdateAttrValue}/>
+                    <Attribute key={attr.id} attr={attr} onUpdateAttrValue={onUpdateAttrValue} onUpdateModifier={onUpdateModifier}/>
                 ))}
                 </div>
         )

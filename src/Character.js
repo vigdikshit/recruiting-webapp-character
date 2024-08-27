@@ -24,7 +24,8 @@ const Character = () => {
         const attrList = ATTRIBUTE_LIST.map((attr, index) => ({
             name: attr,
             id: index + 1,
-            value: 10
+            value: 10,
+            modifierValue: 0
         }))
         setAttributeList(attrList)
     }
@@ -43,7 +44,8 @@ const Character = () => {
         const cl = Object.entries(CLASS_LIST)
             .map(([key, classobj]) => ({
                 name: key,
-                criteriaPassed: checkClassCriteria(classobj)
+                criteriaPassed: checkClassCriteria(classobj),
+                value: classobj
             }))
         setClassList(cl)
     }
@@ -51,6 +53,13 @@ const Character = () => {
     const updateAttributeValue = (id, value) => {
         setAttributeList(prevAttrList =>
             prevAttrList.map(attr => attr.id === id ? {...attr, value: value} : attr
+            )
+        )
+    }
+
+    const updateModifierValue = (id, value) => {
+        setAttributeList(prevAttrList =>
+            prevAttrList.map(attr => attr.id === id ? { ...attr, modifierValue: value } : attr
             )
         )
     }
@@ -68,7 +77,7 @@ const Character = () => {
     return (
         <div className="container">
             <div className="section">
-                <AttributeList attributeList={attributeList} onUpdateAttrValue={updateAttributeValue}/>
+                <AttributeList attributeList={attributeList} onUpdateAttrValue={updateAttributeValue}  onUpdateModifier={updateModifierValue}/>
             </div>
             <div className="section">
                 <ClassList classList={classList} setCurrentClass={setCurrentClass}/>
