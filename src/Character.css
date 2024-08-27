@@ -10,3 +10,11 @@
     border: 1px solid #ccc;
     text-align: center;
 }
+
+.red {
+    color: red;
+}
+
+.defaultColor {
+    color: white;
+}
