@@ -3,11 +3,14 @@ import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from './consts.js';
 import './Character.css'
 import AttributeList from './attributes/AttributeList';
 import ClassList from './classes/ClassList';
+import ClassDetails from './classes/ClassDetails';
 
 const Character = () => {
 
     const [attributeList, setAttributeList] = useState([])
     const [classList, setClassList] = useState([])
+    const [selectedClass, setSelectedClass] = useState({})
+    const [detailsClosed, setDetailsClosed] = useState(true)
 
     useEffect(() => {
         createAttrList()
@@ -52,14 +55,27 @@ const Character = () => {
         )
     }
 
+    const setCurrentClass = (name) => {
+        const cls = Object.entries(CLASS_LIST).find(([key]) => key === name)
+        setSelectedClass(cls[1])
+        setDetailsClosed(false)
+    }
+
+    const closeClassDetails = () => {
+        setDetailsClosed(true)
+    }
+
     return (
         <div className="container">
             <div className="section">
                 <AttributeList attributeList={attributeList} onUpdateAttrValue={updateAttributeValue}/>
             </div>
             <div className="section">
-                <ClassList classList={classList} />
+                <ClassList classList={classList} setCurrentClass={setCurrentClass}/>
             </div>
+            {!detailsClosed && <div className="section">
+                <ClassDetails selectedClass={selectedClass} closeClassDetails={closeClassDetails}/>
+            </div>}
         </div>
     )
 }
