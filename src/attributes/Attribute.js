@@ -13,7 +13,7 @@ const Attribute = ({attr, onUpdateAttrValue, onUpdateModifier}) => {
      }, [val]) 
 
     useEffect(() => {
-        onUpdateModifier(attr.id, modifierValue)
+        onUpdateModifier(attr, modifierValue)
     }, [modifierValue])
 
     useEffect(() => {
